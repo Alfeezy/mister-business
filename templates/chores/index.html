@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="mb-4">
+    Chore List
+</h1>
+<ul class="list-group">
+  {% for chore in chorelist %}
+    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+      <h5 class="mb-0">
+        {{ chore.description }} (<code>{{ chore.id }}</code>)
+      </h5>
+      <div>
+        <a href="#" class="btn btn-sm btn-outline-secondary">Edit</a>
+        <form action="{{ url_for('delete_chore', id=chore.id) }}" method="POST" class="d-inline">
+          <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+        </form>
+      </div>
+    </li>
+  {% endfor %}
+  <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+    <a href="{{ url_for('new_chore')}}" class="btn btn-sm btn-outline-success">New Chore</a>
+  </li>
+</ul>
+{% endblock %}

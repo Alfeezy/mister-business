@@ -1,5 +1,5 @@
 jobs.sqlite
-/node_modules
-/__pycache__
+*/node_modules
+app/__pycache__
 
 .gitignore

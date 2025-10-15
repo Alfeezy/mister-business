@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html class="bg-white dark:bg-gray-950 scheme-light dark:scheme-dark">    
+<html>  
     <head>
         <title>Mister Business</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="{{ url_for('static', path='images/favicon.ico') }}" type="image/x-icon">
-        <link rel="stylesheet" href="{{ url_for('static', path='css/misterbusiness.css') }}" >
-        <script src="./node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+        <link rel="stylesheet" href="{{ url_for('static', path='/css/main.css') }}">
     </head>
     <body>
-        <div id="content" class="flex p-6 h-dvh">
+        {% include 'header.html' %}
+        <div style="height: 120px"></div>
+        <div class="container container-md">
             {% block content %}{% endblock %}
         </div>
+        <script type="text/javascript" src="{{ url_for('static', path='/js/main.js') }}"></script>
     </body>
 </html>
-<script type="module">
-    import 'tw-elements';
-</script>

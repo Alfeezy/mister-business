@@ -1,0 +1,27 @@
+{
+  "name": "misterbusiness",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "sass src/main.scss ../static/css/main.css --style=compressed",
+    "build:js": "esbuild src/main.js --bundle --outfile=../static/js/main.js",
+    "build": "npm run build:css && npm run build:js",
+    "watch:css": "sass --watch src/main.scss ../static/css/main.css",
+    "watch:js": "esbuild src/main.js --bundle --outfile=../static/js/main.js --watch",
+    "watch": "npm run watch:css & npm run watch:js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8",
+    "bootstrap.native": "^5.1.6"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.11",
+    "sass": "^1.93.2"
+  }
+}
