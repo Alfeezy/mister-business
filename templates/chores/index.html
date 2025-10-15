@@ -9,20 +9,25 @@
       <div>
         <h4>{{ chore.description }}</h4>
         <h6>
-          Every {% if chore.interval > 1 %}{{ chore.interval }}{% endif %} Day{% if chore.interval > 1 %}s{% endif %}
+          Every {% if chore.interval > 1 %}{{ chore.interval }}{% endif %} Day{% if chore.interval > 1 %}s{% endif %} 
         </h6>
-        <code>{{ chore.id }}</code>
-      </div>
-      <div class="d-flex gap-2">
-        <a href="#" class="btn btn-sm btn-outline-secondary">Edit</a>
-        <form action="{{ url_for('delete_chore', id=chore.id) }}" method="POST" class="d-inline">
-          <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-        </form>
+        <h6>
+          <i>Next Run: {{chore.next_run.strftime("%A, %B %d")}}</i>
+        </h6>
+        </div>
+      <div class="d-flex align-self-stretch align-items-end flex-column">
+        <code class="mb-auto text-end">{{ chore.id }}</code>
+        <div class="d-flex gap-2">
+          <a href="#" class="btn btn-outline-secondary">Edit</a>
+          <form action="{{ url_for('delete_chore', id=chore.id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?');">
+            <button type="submit" class="btn btn-outline-danger">Delete</button>
+          </form>
+        </div>
       </div>
     </li>
   {% endfor %}
   <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-    <a href="{{ url_for('new_chore')}}" class="btn btn-sm btn-outline-success">New Chore</a>
+    <a href="{{ url_for('new_chore')}}" class="btn btn-outline-success">New Chore</a>
   </li>
 </ul>
 {% endblock %}

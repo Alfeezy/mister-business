@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
@@ -86,6 +86,6 @@ async def get_chore(id: str):
 async def delete_chore(id: str):
   chore = scheduler.get_job(id)
   if chore == None:
-    raise HTTPException(status_code=404, detail=f"Chore not found")
+    raise HTTPException(status_code=404, detail="Chore not found")
   scheduler.remove_job(id)
-  return {"message": "Chore successfully deleted."}
+  return RedirectResponse(url="/chores", status_code=303)
