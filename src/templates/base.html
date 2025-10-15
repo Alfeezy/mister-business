@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html class="bg-white dark:bg-gray-950 scheme-light dark:scheme-dark">    
+    <head>
+        <title>Mister Business</title>
+        <link rel="icon" href="{{ url_for('static', path='images/favicon.ico') }}" type="image/x-icon">
+        <link rel="stylesheet" href="{{ url_for('static', path='css/misterbusiness.css') }}" >
+    </head>
+    <body>
+        <div id="content" class="flex p-6 h-dvh">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
+<style>

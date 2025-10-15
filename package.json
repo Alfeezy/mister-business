@@ -1,0 +1,25 @@
+{
+  "name": "misterbusiness",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Alfeezy/mister-business#readme",
+  "bugs": {
+    "url": "https://github.com/Alfeezy/mister-business/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alfeezy/mister-business.git"
+  },
+  "license": "ISC",
+  "author": "Bastien Gliech",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "tailwind:watch": "npx @tailwindcss/cli -i ./src/css/input.css -o ./static/css/misterbusiness.css --watch",
+    "dev": "fastapi dev"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.14",
+    "tailwindcss": "^4.1.14"
+  }
+}

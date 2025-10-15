@@ -1,8 +1,14 @@
-from fastapi import FastAPI, HTTPException
-from datetime import datetime
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.schedulers.background import BackgroundScheduler
+
 from pydantic import BaseModel
+
+from datetime import datetime
 
 # scheduler
 jobstores = {
@@ -19,17 +25,15 @@ class Chore(BaseModel):
   interval: int = 7
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+templates = Jinja2Templates(directory="src/templates")
 
 def print_job(description):
   print(description)
 
-@app.post("/chores/")
-async def create_chore(chore: Chore):
-  scheduler.add_job(print_job, 'interval', id=chore.id, name=chore.description, args=[chore.description], start_date=chore.start, days=chore.interval)
-  return chore.id
-
-@app.get("/chores/")
-async def get_chores():
+@app.get("/", response_class=HTMLResponse)
+async def get_chores(request: Request):
   chorelist = []
   for chore in scheduler.get_jobs():
     chorelist.append({
@@ -37,7 +41,12 @@ async def get_chores():
       "description": chore.name,
       "next_run": chore.next_run_time
     })
-  return chorelist
+  return templates.TemplateResponse("index.html", {"request": request, "chorelist": chorelist})
+  
+@app.post("/chores/")
+async def create_chore(chore: Chore):
+  scheduler.add_job(print_job, 'interval', id=chore.id, name=chore.description, args=[chore.description], start_date=chore.start, days=chore.interval)
+  return chore.id
 
 @app.get("/chore/{id}")
 async def get_chore(id: str):
