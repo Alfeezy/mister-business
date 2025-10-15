@@ -13,13 +13,14 @@
   "license": "ISC",
   "author": "Bastien Gliech",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "src/js/index.js",
   "scripts": {
     "tailwind:watch": "npx @tailwindcss/cli -i ./src/css/input.css -o ./static/css/misterbusiness.css --watch",
     "dev": "fastapi dev"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.14",
-    "tailwindcss": "^4.1.14"
+    "tailwindcss": "^4.1.14",
+    "tw-elements": "^2.0.0"
   }
 }

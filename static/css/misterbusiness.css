@@ -180,15 +180,6 @@
   .h-dvh {
     height: 100dvh;
   }
-  .bg-\[whitesmoke\] {
-    background-color: whitesmoke;
-  }
-  .bg-gray-100 {
-    background-color: var(--color-gray-100);
-  }
-  .bg-gray-200 {
-    background-color: var(--color-gray-200);
-  }
   .bg-white {
     background-color: var(--color-white);
   }
