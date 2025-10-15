@@ -44,6 +44,7 @@ async def get_chores(request: Request):
     chorelist.append({
       "id": chore.id,
       "description": chore.name,
+      "interval": chore.trigger.interval.days,
       "next_run": chore.next_run_time
     })
   return templates.TemplateResponse("chores/index.html", {"request": request, "chorelist": chorelist})

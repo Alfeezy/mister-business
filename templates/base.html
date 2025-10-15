@@ -9,8 +9,8 @@
     </head>
     <body>
         {% include 'header.html' %}
-        <div style="height: 120px"></div>
-        <div class="container container-md">
+        <div style="height: 76px"></div>
+        <div class="container-fluid p-5">
             {% block content %}{% endblock %}
         </div>
         <script type="text/javascript" src="{{ url_for('static', path='/js/main.js') }}"></script>
