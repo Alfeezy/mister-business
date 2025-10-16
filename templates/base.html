@@ -10,6 +10,11 @@
     <body>
         {% include 'header.html' %}
         <div style="height: 76px"></div>
+        {% if detail %}
+            <div class="text-success">
+                {{ detail }}
+            </div>  
+        {% endif %}
         <div class="container-fluid p-5">
             {% block content %}{% endblock %}
         </div>

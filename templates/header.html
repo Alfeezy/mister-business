@@ -1,6 +1,6 @@
 <header class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
   <div class="container-fluid p-2 ps-2">
-    <a class="navbar-brand btn btn-success-outline d-flex gap-2" href="/">
+    <a class="navbar-brand d-flex ms-2 gap-2" href="/">
       <img src="{{ url_for('static', path='images/favicon.ico') }}" width="32" height="32" alt="MB">
       Mister Business
     </a>
@@ -10,7 +10,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/chores/">Scheduled Chores</a>
+          <a class="nav-link" aria-current="page" href="/chores/">Active Chores</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/chores/new">New Chore</a>
         </li>
       </ul>
   </div>

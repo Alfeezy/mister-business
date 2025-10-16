@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>
-        New Chore
+        Edit Chore
     </h1>
-    <form action="{{ url_for('create_chore') }}" method="POST">
+    <form action="{{ url_for('update_chore', id=id) }}" method="POST">
         {% include 'chores/form.html' %}
     </form>
 {% endblock %}

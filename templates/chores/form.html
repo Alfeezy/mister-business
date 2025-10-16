@@ -1,0 +1,46 @@
+<div class="mb-3">
+  <label for="description" class="form-label">Chore Description</label>
+  <input 
+    type="text" 
+    class="form-control" 
+    id="description"
+    name="description"
+    placeholder="Enter chore description"
+    value="{{ chore.description if chore.description else ''}}"
+    required>
+</div>
+<div class="mb-3">
+    <label for="start" class="form-label">First Run</label>
+    <input 
+      type="datetime-local"
+      class="form-control"
+      id="start"
+      name="start"
+      step="60"
+      value="{{ chore.start.strftime("%Y-%m-%dT%H:%M") }}"
+      required>
+</div>
+<div class="mb-3">
+  <label for="interval" class="form-label">Frequency</label>
+    <div class="row align-items-baseline">
+      <div class="col-auto">
+        Every
+      </div>
+      <div class="col-1 p-0">
+        <input
+          type="number"
+          class="form-control"
+          id="interval"
+          name="interval"
+          min=0
+          placeholder=7
+          value="{{ chore.interval if chore.interval else ''}}"
+          required
+        >
+      </div>
+      <div class="col-auto">
+        Days
+      </div>
+    </div>
+</div>
+<button type="submit" class="btn btn-outline-primary">Save</button>
