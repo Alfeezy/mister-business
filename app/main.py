@@ -12,6 +12,8 @@ from pydantic import BaseModel
 
 from datetime import datetime
 
+from receipt_handler import print_chore
+
 # scheduler
 jobstores = {
   'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')
@@ -31,7 +33,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 def print_job(description):
-  print(description)
+  print_chore(description)
 
 @app.get("/chore/{id}")
 async def get_chore(id: str):
@@ -58,7 +60,7 @@ async def get_chores(request: Request):
       "interval": job.trigger.interval.days,
       "next_run": job.next_run_time
     })
-  chorelist.sort(key=lambda item: item['description'])
+  chorelist.sort(key=lambda item: item['next_run'])
   return templates.TemplateResponse("chores/index.html", {"request": request, "chorelist": chorelist})
   
 @app.get("/chores/new", response_class=HTMLResponse)
