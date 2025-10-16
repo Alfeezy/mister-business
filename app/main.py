@@ -12,7 +12,7 @@ from pydantic import BaseModel
 
 from datetime import datetime
 
-from receipt_handler import print_chore
+from app.services.receipt_printer_service import print_chore
 
 # scheduler
 jobstores = {
