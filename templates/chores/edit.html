@@ -1,8 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>
-        Edit Chore
-    </h1>
+    <div class="row d-flex align-items-end mb-3">
+        <div class="col">
+            <h1 class="mb-0">
+                Edit Chore
+            </h1>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <form action="{{ url_for('delete_chore', id=id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?');">
+                <button type="submit" class="btn btn-outline-danger">Delete Chore</button>
+            </form>
+        </div>
+    </div>
     <form action="{{ url_for('update_chore', id=id) }}" method="POST">
         {% include 'chores/form.html' %}
     </form>

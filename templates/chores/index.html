@@ -7,13 +7,13 @@
   {% for chore in chorelist %}
     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
       <div>
-        <h4>{{ chore.description }}</h4>
-        <h6>
-          Every {% if chore.interval > 1 %}{{ chore.interval }}{% endif %} Day{% if chore.interval > 1 %}s{% endif %} 
+        <h4 class="mb-2">{{ chore.description }}</h4>
+        <h6 class="mb-1 ms-2">
+          Every {% if chore.interval > 1 %}{{ chore.interval }}{% endif %} Day{% if chore.interval > 1 %}s{% endif %} at {{chore.next_run.strftime("%I:%M%p")}} 
         </h6>
-        <h6>
-          <i>Next Run: {{chore.next_run.strftime("%A, %B %d")}}</i>
-        </h6>
+        <small class="ms-2">
+          <i>Next run: {{chore.next_run.strftime("%A, %B %d")}}</i>
+        </small>
         </div>
       <div class="d-flex align-self-stretch align-items-end flex-column">
         <code class="mb-auto text-end">{{ chore.id }}</code>
