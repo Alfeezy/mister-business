@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>
+      Print
+  </h1>
+  <form action="{{ url_for('print') }}" method="POST">
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        id="description"
+        name="description"
+        placeholder="Enter description"
+        required>
+    </div>
+    <button type="submit" class="btn btn-outline-primary">Save</button>
+  </form>
+
+{% endblock %}

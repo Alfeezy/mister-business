@@ -108,6 +108,15 @@ async def update_chore(request: Request, id: str, description: str = Form(...), 
   )
   return RedirectResponse(url="/chores", status_code=303)
 
+@app.get("/chores/print", response_class=HTMLResponse)
+async def new_chore(request: Request):
+  return templates.TemplateResponse("chores/print.html", {"request": request})
+
+@app.post("/chores/print")
+async def print(request: Request, description: str = Form(...)):
+  print_job(description)
+  return RedirectResponse(url="/chores/print", status_code=303)
+
 @app.delete("/chore/{id}")
 @app.post("/chore/{id}/delete")
 async def delete_chore(id: str):
