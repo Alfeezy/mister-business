@@ -18,7 +18,10 @@ from services.receipt_printer_service import print_chore
 jobstores = {
   'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')
 }
-scheduler = BackgroundScheduler(jobstores=jobstores)
+scheduler = BackgroundScheduler(
+  jobstores=jobstores,
+  timezone='America/New_York'
+)
 scheduler.start()
 
 # model for creating chores
