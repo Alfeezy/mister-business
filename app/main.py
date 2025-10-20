@@ -117,20 +117,22 @@ async def run_chore(request: Request, id: str):
   job = scheduler.get_job(id)
   current_dt = datetime.now()
   run_dt = job.next_run_time
-  new_dt = current_dt + job.trigger.interval
+  new_dt = (current_dt + job.trigger.interval).replace(
+    hour=run_dt.hour,
+    minute=run_dt.minute,
+    second=0,
+    microsecond=0
+  )
 
   # trigger now
   print_chore(job.name)
 
   # reset next chore time to later date
-  job.modify(next_run_time=new_dt.replace(
-      hour=run_dt.hour,
-      minute=run_dt.minute,
-      second=0,
-      microsecond=0
-    )
+  job.reschedule(
+    'interval',
+    start_date=new_dt
   )
-  return RedirectResponse(url="/chores", status_code=200)
+  return RedirectResponse(url="/chores", status_code=303)
 
 
 @app.get("/chores/print", response_class=HTMLResponse)
