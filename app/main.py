@@ -12,6 +12,8 @@ from pydantic import BaseModel
 
 from datetime import datetime
 
+from time import sleep
+
 from .services.receipt_printer_service import print_chore
 
 # scheduler
@@ -37,6 +39,7 @@ templates = Jinja2Templates(directory="templates")
 
 def print_job(description):
   print_chore(description)
+  sleep(5)
 
 @app.get("/chore/{id}")
 async def get_chore(id: str):
