@@ -7,12 +7,13 @@ import uuid
 
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.interval import IntervalTrigger
 
 from pydantic import BaseModel
 
 from datetime import datetime
-
 from time import sleep
+from zoneinfo import ZoneInfo
 
 from .services.receipt_printer_service import print_chore
 
@@ -111,8 +112,29 @@ async def update_chore(request: Request, id: str, description: str = Form(...), 
   )
   return RedirectResponse(url="/chores", status_code=303)
 
+@app.post("/chore/{id}/run_chore")
+async def run_chore(request: Request, id: str):
+  job = scheduler.get_job(id)
+  current_dt = datetime.now()
+  run_dt = job.next_run_time
+  new_dt = current_dt + job.trigger.interval
+
+  # trigger now
+  print_chore(job.name)
+
+  # reset next chore time to later date
+  job.modify(next_run_time=new_dt.replace(
+      hour=run_dt.hour,
+      minute=run_dt.minute,
+      second=0,
+      microsecond=0
+    )
+  )
+  return RedirectResponse(url="/chores", status_code=200)
+
+
 @app.get("/chores/print", response_class=HTMLResponse)
-async def new_chore(request: Request):
+async def get_print(request: Request):
   return templates.TemplateResponse("chores/print.html", {"request": request})
 
 @app.post("/chores/print")
