@@ -14,7 +14,7 @@ from pydantic import BaseModel
 from datetime import datetime, timedelta
 from time import sleep
 
-from .services.receipt_printer_service import print_chore, ensure_connection
+from .services.receipt_printer_service import print_chore
 
 # scheduler
 datastore = SQLAlchemyDataStore('sqlite:///jobs.sqlite')
