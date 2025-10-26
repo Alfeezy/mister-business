@@ -118,6 +118,7 @@ async def update_chore(request: Request, id: str, description: str = Form(...), 
 @app.post("/chore/{id}/run_chore")
 async def run_chore(request: Request, id: str):
   schedule = scheduler.get_schedule(id)
+
   current_dt = datetime.now()
   run_dt = schedule.next_fire_time
   new_dt = (current_dt + timedelta(days=schedule.trigger.days)).replace(
@@ -128,7 +129,7 @@ async def run_chore(request: Request, id: str):
   )
 
   # trigger now
-  print(schedule.args[0])
+  scheduler.run_job(id)
 
   # reset next chore time to later date 
   trigger = CalendarIntervalTrigger(
