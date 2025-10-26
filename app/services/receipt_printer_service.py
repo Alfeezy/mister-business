@@ -6,7 +6,7 @@ import datetime
 VENDOR_ID = 0x04b8
 PRODUCT_ID = 0x0202
 
-p = Usb(VENDOR_ID, PRODUCT_ID)
+
 
 def wrap_text(text, width=32):
     words = text.split()
@@ -30,6 +30,7 @@ def wrap_text(text, width=32):
     return "\n\n".join(lines)
 
 def print_chore(chore_name: str):
+    p = Usb(VENDOR_ID, PRODUCT_ID)
     now = datetime.datetime.now().strftime("%Y-%m-%d %I:%M %p")
 
     p.set(align="center", bold=False, double_height=True)
@@ -51,3 +52,4 @@ def print_chore(chore_name: str):
     p.text("\n--------------------------------\n\n")
     p.text("The Devil hates slackers.\n\n\n\n\n")
     p.cut()
+    p.close()
