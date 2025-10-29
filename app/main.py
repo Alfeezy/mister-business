@@ -32,7 +32,6 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
 
-@task(misfire_grace_time=100000)
 def print_job(description):
   print_chore(description)
   sleep(5)
