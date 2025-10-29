@@ -30,6 +30,12 @@ def wrap_text(text, width=32):
     return "\n\n".join(lines)
 
 def print_chore(chore_name: str):
+    try:
+        p.set(align="center", bold=False, double_height=True)
+    except: 
+        p.close()
+        p = Usb(VENDOR_ID, PRODUCT_ID)
+
     now = datetime.datetime.now().strftime("%Y-%m-%d %I:%M %p")
 
     p.set(align="center", bold=False, double_height=True)
